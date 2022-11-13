@@ -1,0 +1,51 @@
+[tool.poetry]
+name = "WeatherApi"
+version = "0.0.1"
+description = "Simple weather api"
+authors = ["Serghei Ungurean <srg@intelbit.io>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10.1"
+aiohttp = "^3.7.3"
+uvicorn = "^0.19.0"
+loguru = "^0.6.0"
+atomcache = "^0.6.0"
+fastapi = "0.85"
+
+[tool.poetry.dev-dependencies]
+black = "^22.10.0"
+wemake-python-styleguide = "^0.17.0"
+isort = "^5.10.1"
+autoflake = "^1.7.7"
+mypy = "^0.990"
+asgi-lifespan = "^2.0.0"
+
+[tool.isort]
+profile = "black"
+src_paths = ["app", "tests"]
+combine_as_imports = true
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+filterwarnings = "error"
+addopts = '''
+  --strict
+  --tb=short
+  --cov=app
+  --cov=tests
+  --cov-branch
+  --cov-report=term-missing
+  --cov-report=html
+  --cov-report=xml
+  --no-cov-on-fail
+  --cov-fail-under=100
+'''
+env = ["SECRET_KEY=secret"]
+
+[build-system]
+requires = ["poetry>=1.0"]
+build-backend = "poetry.masonry.api"
+
+[tool.black]
+line-length = 120
